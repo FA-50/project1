@@ -1,6 +1,7 @@
 package model.s03;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -14,9 +15,11 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "products")
 public class Product {
@@ -45,7 +48,7 @@ public class Product {
 		// 반대편에서 조인할 ON컬럼명
 		inverseJoinColumns = @JoinColumn(name = "category_id")
 	)
-	private List<Category> categories;
+	private List<Category> categories = new ArrayList<>();
 
 	public Product(String name, Integer price, int stock) {
 		this.name = name;

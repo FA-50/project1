@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,6 +29,12 @@ public class Address {
 	private String city;
 	@Column(nullable=false)
 	private String street;
+
+	public Address(String zipcode, String city, String street){
+		this.zipcode = zipcode;
+		this.city = city;
+		this.street = street;
+	}
 
 	// 외래키의 주인
 	@ManyToOne(optional=false, fetch = FetchType.LAZY)

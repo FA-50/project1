@@ -16,7 +16,7 @@ public class GymMembership {
 
 	@Enumerated(EnumType.STRING) // EnumType : Enum을 DB에 반영하기 위한 전략
 	// ORDINAL : ENUM의 이름이 아닌 순서인덱스로 반영하게 됨
-	// ENUM Class 수정 시 데이터 순서가 임의로 변경될 수 있으므로 사용하지 않는 것을 권고 -> String 사용
+	//  -> String 사용
 
 	// STRING :  ENUM의 이름으로 반영 -> 주로 사용
 	private MembershipLevel membershipLevel;

@@ -16,7 +16,6 @@ public class Bootstrapping3 {
 			.jdbcUrl("jdbc:h2:mem:test-db")
 			.jdbcUsername("sa")
 			.jdbcPassword("");
-
 		EntityManagerFactory emf4 = hfg.createEntityManagerFactory();
 
 		// EntityManagerFactory를 통해 EntityManager 객체를 생성하고,

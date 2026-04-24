@@ -10,7 +10,6 @@ import jakarta.persistence.Id;
 
 // 자바에서 생성자가 따로 정의되있지 않은 경우 JVM에 의해 컴파일 시점에서 기본 생성자를 자동 생성
 // 단, 생성자( 사용자 정의 생성자 )를 오버로딩한 경우 자동생성하지 않으므로, 따로 기본 생성자를 정의해야한다.
-// 해당 기본 생성자는 public / protected로 선언해야한다.
 @Entity
 public class EntityObjectMapping {
 

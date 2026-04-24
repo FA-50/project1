@@ -14,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Many;
@@ -34,9 +35,10 @@ public class Category {
 	@JoinColumn(name = "parent")
 	private Category parent;
 
+	// 비어있는 List를 가지도록 초기화
 	@OneToMany(mappedBy = "parent")
-	private List<Category> children;
+	private List<Category> children = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "categories")
-	private List<Product> products;
+	private List<Product> products = new ArrayList<>();
 }

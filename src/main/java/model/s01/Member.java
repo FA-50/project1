@@ -1,12 +1,12 @@
 package model.s01;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import model.s03.Order;
+
+import java.util.List;
 
 @Entity
 @Data
@@ -34,4 +34,11 @@ public class Member {
 	public void changeName(String newName) {
 		this.name = newName;
 	}
+
+	@ManyToOne
+	@JoinColumn(name = "member_id", nullable = false)
+	private Member member;
+
+	@OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Order> orderList;
 }

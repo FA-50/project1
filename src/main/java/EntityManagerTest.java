@@ -17,49 +17,30 @@ import jakarta.persistence.Persistence;
 import model.s02.Post;
 
 public class EntityManagerTest {
+	// EntiyManagerFactory 생성
 	private static final EntityManagerFactory emf;
-
 	static{
 		// xml 파일 정보를 통해 초기화
 		emf = Persistence.createEntityManagerFactory("hibernate-exp-4");
 	}
-
 	public static void main(String[] args) {
 		// EntityManager 생성
-		// Hibernate의 세션을 감싸는 객체
-		
-		
-		// Thread Safe하지 않으므로, 하나의 스레드는 하나의 Entity Manager를 사용
-		// SqlSession처럼 Connection 하나만 사용하므로
-		// 톰캣이 요청 하나 당 스레드 하나 씩 생성하므로 신경안써도되나 ,
-		// Webflux를 사용하는 경우 신경을 써야함.
-
-		// 하나의 EntityManger는 Persistence Context(First Level Cache + Action Queue + Snapshot)를 포함
 		EntityManager entityManager = emf.createEntityManager();
-
 		// JPA에서는 하나의 작업단위 당 하나의 EntityManager 객체를 생성하여 활용
-
 		// Transaction 자바객체 생성
 		EntityTransaction transaction = entityManager.getTransaction();
-
 		try{
-			// Transaction BEGIN 실행
+			// 트랜잭션 시작
 			transaction.begin();
-
-			// 비영속 상태
+			// Transient : 비영속
 			Post post = new Post(1, "title", "contents");
-
-			// 영속 상태
-			// INSERT 수행됨
-			// Dirty Checking을 통해 객체 변경을 감지 후
-			// 해당 변경에 맞게 INSERT 쿼리를 작성하여 DB로 전송
+			// Managed : 영속
 			entityManager.persist(post);
-			
-			// Transaction Commit
+			// Removed : 삭제
+			entityManager.remove(post);
+			// 트랜잭션 종료
 			transaction.commit();
-
 		}catch (Exception e){
-			System.out.println(e.getMessage());
 			// 트랜잭션 실패 시 rollback.
 			transaction.rollback();
 		} finally{
